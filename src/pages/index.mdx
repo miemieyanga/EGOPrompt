@@ -1,44 +1,43 @@
 ---
 layout: ../layouts/Layout.astro
-title: Research Project Page Template
+title: Personalized Decision Modeling: Utility Optimization or Textualized‑Symbolic Reasoning
 authors:
-  - name: Roman Hauksson
-    url: https://roman.technology
-    institution: University of Texas at Dallas
-    notes: ["*", †]
-  - name: Author Two
-    institution: Institution Two
-    notes: ["*", †]
-  - name: Author Three
-    institution: Institution Three
-    notes: ["*"]
-  - name: Author Four
-    institution: Institution Four
-conference: Conference Name
+  - name: Yibo Zhao
+    url: https://yibozh.github.io/
+    institution: Johns Hopkins University
+  - name: Yang Zhao
+    url: https://scholar.google.com.hk/citations?user=_Y02L7sAAAAJ
+    institution: Johns Hopkins University
+  - name: Hongru Du
+    url: https://hongru94.github.io/
+    institution: University of Virginia
+    notes: ["*", "†"]
+  - name: Hao (Frank) Yang
+    url: https://www.haofrankyang.net/
+    institution: Johns Hopkins University
+    notes: ["†"]
+conference: NeurIPS 2025
 notes:
   - symbol: "*"
-    text: author note one
-  - symbol: †
-    text: author note two
+    text: This work was completed while Hongru Du was at Johns Hopkins University.
+  - symbol: "†"
+    text: Correspondence to: Hongru Du and Hao (Frank) Yang.
 links:
-  - name: Paper
-    url: https://github.com/RomanHauksson/academic-project-astro-template
+  - name: Paper (PDF)
+    url: /assets/athena-paper.pdf
     icon: ri:file-pdf-2-line
-  - name: Code
-    url: https://github.com/RomanHauksson/academic-project-astro-template
+  - name: Code (coming soon)
+    url: #
     icon: ri:github-line
-  - name: arXiv
-    url: https://github.com/RomanHauksson/academic-project-astro-template
-    icon: academicons:arxiv
 
-# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
+# Page theme; keep device so your figures look good in both modes.
 theme: device
 
-# This is the icon that appears in the user's browser tab. To customize, change the favicon.svg file in /public/, or add your own file to /public/ and change the filename here.
+# Browser tab icon; change the file in /public if you want a custom one.
 favicon: favicon.svg
 
-# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
-description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+# Link preview metadata
+description: ATHENA is a two-stage framework that unifies symbolic utility discovery with individual-level semantic adaptation to model personalized human decisions, outperforming utility-based, ML, and LLM baselines on travel mode and vaccine choice tasks.
 thumbnail: screenshot-light.png
 ---
 
@@ -47,97 +46,73 @@ import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
 import Picture from "../components/Picture.astro";
-import ModelViewer from "../components/ModelViewer.astro"
+import ModelViewer from "../components/ModelViewer.astro";
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 import { Comparison } from "../components/Comparison.tsx";
-
-import outside from "../assets/outside.mp4";
-import transformer from "../assets/transformer.webp";
-import dogsDiffc from "../assets/dogs-diffc.png"
-import dogsTrue from "../assets/dogs-true.png"
-
 import Table from "../components/Table.astro";
-export const components = { table: Table }
-
-<Video src={outside} />
+export const components = { table: Table };
 
 <HighlightedSection>
 
 ## Abstract
 
-This is a live demo for a template you can use to create a simple project page for your research paper. See the code for the template and instructions on how to use it yourself [here](https://github.com/RomanHauksson/academic-project-astro-template). It's made with the [Astro web framework](https://astro.build/) and styled with [Tailwind CSS](https://tailwindcss.com/). You write the content in [MDX](https://mdxjs.com/), which enables markdown formatting like **bold**, _italics_, and ~strikethrough~, as well as custom components like <SmallCaps>small caps.</SmallCaps>
+We study **personalized decision modeling** in settings where individual choices deviate from population-optimal predictions. We introduce **ATHENA**—an *Adaptive Textual‑symbolic Human‑centric Reaso*ning framework—built in two stages: (1) a **group‑level symbolic utility discovery** procedure (LLM‑augmented symbolic search) learns compact, interpretable utility forms; and (2) an **individual‑level semantic adaptation** step refines a **personal template** with TextGrad to capture each person’s preferences and constraints. On **Swissmetro** (travel mode choice) and **COVID‑19 vaccine uptake** tasks, ATHENA consistently outperforms utility‑based, ML, and LLM baselines, improving F1 by ≥ 6.5% over the strongest alternatives while maintaining calibrated probabilistic predictions. Together, these stages bridge classic **Random Utility Maximization** with **textual semantic context**, yielding interpretable structure and personalized reasoning.
 
 </HighlightedSection>
 
-## Figures
-
-Use the figure component to display images, videos, equations, or any other element, with an optional caption.
-
-<Figure>
-  <Picture slot="figure" src={transformer} alt="Diagram of the transformer deep learning architecture." invertInDarkMode />
-  <Fragment slot="caption">Diagram of the transformer deep learning architecture.</Fragment>
-</Figure>
-
-If you stored your figures as PDFs, the `Picture` component can convert them into web-friendly images automatically.
-
-<Figure>
-  <Picture slot="figure" src="../assets/allstate-sparsity.pdf" alt="Impact of the sparsity-aware algorithm in XGBoost on the Allstate-10K dataset." invertInDarkMode />
-  <Fragment slot="caption">Impact of the sparsity-aware algorithm in [XGBoost](https://arxiv.org/abs/1603.02754) on the Allstate-10K dataset.</Fragment>
-</Figure>
-
-Use the `Comparison` component to compare two elements with an interactive slider. It should work for any component or HTML element, including images, videos, and 3D models.
-
-<Figure>
-  <Comparison slot="figure" client:idle >
-    <Picture slot="itemOne" src={dogsDiffc} alt="Photo of two dogs running side-by-side in shallow water, lossily compressed using the DiffC algorithm" />
-    <Picture slot="itemTwo" src={dogsTrue} alt="Original photo of two dogs running side-by-side in shallow water" />
-  </Comparison>
-  <Fragment slot="caption">A photo of two dogs running side-by-side in shallow water, lossily compressed using the [DiffC algorithm](https://jeremyiv.github.io/diffc-project-page/).</Fragment>
-</Figure>
-
-## Two columns
-
-Use the two columns component to display two columns of content. In this example, the first column contains a figure with a YouTube video and the second column contains a figure with a custom [React](https://react.dev/) component. By default, they display side by side, but if the screen is narrow enough (for example, on mobile), they're arranged vertically.
+## Method at a Glance
 
 <TwoColumns>
   <Figure slot="left">
-    <YouTubeVideo slot="figure" videoId="wjZofJX0v4M" />
-    <Fragment slot="caption">Take a look at this YouTube video.</Fragment>
+    <LaTeX slot="figure" formula="P(\,y_i=j\mid X_i\,) = \frac{e^{f(X_i,j;\,\theta)}}{\sum_k e^{f(X_i,k;\,\theta)}}" />
+    <Fragment slot="caption">Choice probability under Random Utility Maximization, where <LaTeX inline formula="f" /> is the systematic utility we learn symbolically. </Fragment>
   </Figure>
   <Figure slot="right">
-    <ModelViewer slot="figure" src="/BoxVertexColors.glb" alt="A cube colored with a rainbow gradient" />
-    <Fragment slot="caption">Now look at this cube, rendered with the `<model-viewer>` web component.</Fragment>
+    <LaTeX slot="figure" formula="P^{t+1}_i \leftarrow P^t_i - \eta\,\nabla_{P_i} \, \mathcal{L}(P^t_i, D_i)" />
+    <Fragment slot="caption">Individual‑level **TextGrad** updates a textual **personal template** to reflect heterogeneous preferences and constraints. </Fragment>
   </Figure>
 </TwoColumns>
 
-## LaTeX
+### Two‑Stage Pipeline
 
-You can also add LaTeX formulas, rendered during the build process using [KaTeX](https://katex.org/) so they're quick to load for visitors of your project page. You can write them inline, like this: <LaTeX inline formula="a^2 + b^2 = c^2" />. Or, you can write them as a block:
+1. **Group‑level symbolic utility discovery.** LLM‑guided sampling + feedback (mutation/crossover) proposes candidate utility formulas; we select <LaTeX inline formula="f^*_g" /> by cross‑entropy over held‑out data.
+2. **Individual‑level semantic adaptation.** Seeded by <LaTeX inline formula="f^*_g" />, a **personalized semantic template** <LaTeX inline formula="P_i" /> is iteratively improved using **textual gradients** to minimize the individual loss.
 
-<LaTeX formula="\int_a^b f(x) dx" />
+## Results
 
-## Tables
+### Overall performance on Swissmetro & Vaccine
 
-Add simple tables using [GitHub Flavored Markdown syntax](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-tables):
+| Task | Best Baseline (Acc/F1) | **ATHENA** (Acc/F1) | AUC | Note |
+| :-- | :-- | :-- | :-- | :-- |
+| Swissmetro | ≈ 0.75 / 0.71 (few‑shot LLM / ML) | **0.81 / 0.77** | **0.88** | +≥6% Acc, +≥6.5% F1 over strongest baseline |
+| Vaccine | ≈ 0.67 / 0.67 (ML) | **0.73 / 0.72** | **0.87** | Best F1 and AUC among all methods |
 
-| Model | Accuracy | F1 score | Training time (hours) |
-| :--- | :---: | :---: | :---: |
-| BERT-base | 0.89 | 0.87 | 4.5 |
-| RoBERTa-large | 0.92 | 0.91 | 7.2 |
-| DistilBERT | 0.86 | 0.84 | 2.1 |
-| XLNet | 0.90 | 0.89 | 6.8 |
+Values summarized from the main table; see paper for exact numbers and settings.
 
-## BibTeX citation
+### Why it works
 
-Displaying your BibTeX citation in a code block makes it easy to copy and paste.
+- **Interpretable structure.** Symbolic utilities converge to compact, reusable fragments (e.g., age–trust interactions), improving generalization and insight.
+- **Personalization.** TextGrad adapts from a strong symbolic prior, avoiding local minima of unguided prompting. Ablations show either stage alone underperforms the full pipeline.
+
+## Demo & Artifacts
+
+- 🧪 **Datasets:** Swissmetro (mode choice), COVID‑19 Vaccine choice (international survey subset).
+- 🧩 **Backbones:** gpt‑4o‑mini, gemini‑2.0‑flash (others in appendix).
+- 🛠️ **Code:** to be released.
+
+## BibTeX
 
 ```bibtex
-@misc{roman2024academic,
-  author = "{Roman Hauksson}",
-  title = "Academic Project Page Template",
-  year = "2024",
-  howpublished = "\url{https://research-template.roman.technology}",
+@inproceedings{zhao2025athena,
+  title        = {Personalized Decision Modeling: Utility Optimization or Textualized-Symbolic Reasoning},
+  author       = {Yibo Zhao and Yang Zhao and Hongru Du and Hao Frank Yang},
+  booktitle    = {NeurIPS},
+  year         = {2025}
 }
 ```
+
+## Acknowledgments
+
+We thank collaborators and domain experts whose feedback informed the **Concept Library** used during symbolic discovery.
