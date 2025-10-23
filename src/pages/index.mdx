@@ -35,7 +35,7 @@ favicon: favicon.svg
 
 # These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
 description: Ego-Prompt can find better prompts for domain-specific tasks.
-thumbnail: "screenshot-light.png"
+thumbnail: screenshot-light.png
 ---
 
 import Video from "../components/Video.astro";
@@ -49,6 +49,7 @@ import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 import { Comparison } from "../components/Comparison.tsx";
 import Table from "../components/Table.astro";
+import main from "../assets/main.png";
 export const components = { table: Table };
 
 <HighlightedSection>
@@ -63,7 +64,7 @@ Designing optimal prompts and reasoning processes for large language models (LLM
 
 
 <Figure>
-  <Picture slot="figure" src="../assets/main.png" alt="Overview of the proposed EGO-Prompt framework." invertInDarkMode />
+  <Picture slot="figure" src={main} alt="Overview of the proposed EGO-Prompt framework." invertInDarkMode />
   <Fragment slot="caption">Overview of the proposed EGO-Prompt framework. (a) LLMs often struggle with domain-specific tasks due to the optimal prompt design and domain knowledge gap. Existing methods rely on the external database or established graph. In comparison, EGO-Prompt evolutionarily incorporates expert knowledge with minimal cost. (b) We represent external knowledge as a graph-based structure. A graph-enhanced prompt is then generated to guide the LLM’s reasoning. Both the graph and the prompt are iteratively optimized using textual gradients from ground-truth data.</Fragment>
 </Figure>
 
