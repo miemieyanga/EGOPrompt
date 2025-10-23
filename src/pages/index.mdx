@@ -1,112 +1,90 @@
 ---
-layout: "../layouts/Layout.astro"
-title: "Personalized Decision Modeling: Utility Optimization or Textualized‑Symbolic Reasoning"
+layout: ../layouts/Layout.astro
+title: How to Auto-optimize Prompts for Domain Tasks? Adaptive Prompting and Reasoning through Evolutionary Structured Knowledge Adaptation
 authors:
-  - name: "Yibo Zhao"
-    url: "https://yibozh.github.io/"
-    institution: "Johns Hopkins University"
   - name: "Yang Zhao"
     url: "https://scholar.google.com.hk/citations?user=_Y02L7sAAAAJ"
     institution: "Johns Hopkins University"
-  - name: "Hongru Du"
-    url: "https://hongru94.github.io/"
-    institution: "University of Virginia"
-    notes: ["*", "†"]
-  - name: "Hao (Frank) Yang"
+  - name: "Pu Wang"
+    url: "https://www.linkedin.com/in/pu-wang-a85048389/"
+    institution: "Johns Hopkins University"
+  - name: "Hao Frank Yang"
     url: "https://www.haofrankyang.net/"
     institution: "Johns Hopkins University"
     notes: ["†"]
-conference: "NeurIPS 2025"
+conference: NeurIPS 2025
 notes:
-  - symbol: "*"
-    text: "This work was completed while Hongru Du was at Johns Hopkins University."
   - symbol: "†"
-    text: "Correspondence to: Hongru Du and Hao (Frank) Yang."
+    text: Corresponding author
 links:
-  - name: "Paper (PDF)"
-    url: "/assets/athena-paper.pdf"
-    icon: "ri:file-pdf-2-line"
-  - name: "Code (coming soon)"
-    url: "#"
-    icon: "ri:github-line"
-theme: "device"
-favicon: "favicon.svg"
-description: "ATHENA is a two-stage framework that unifies symbolic utility discovery with individual-level semantic adaptation to model personalized human decisions, outperforming utility-based, ML, and LLM baselines on travel mode and vaccine choice tasks."
-thumbnail: "screenshot-light.png"
+  - name: Paper
+    url: https://github.com/
+    icon: ri:file-pdf-2-line
+  - name: Code
+    url: https://github.com/
+    icon: ri:github-line
+  - name: arXiv
+    url: https://github.com/
+    icon: academicons:arxiv
+
+# The color theme of the page. Defaults to "device" (the preference set in the user's brower or operating system). Setting this to "light" or "dark" will override the user's preference. This is useful if your figures only look good in one theme.
+theme: device
+
+# This is the icon that appears in the user's browser tab. To customize, change the favicon.svg file in /public/, or add your own file to /public/ and change the filename here.
+favicon: favicon.svg
+
+# These keys are optional. If a link to your project page is in a Google search result, text message, or social media post, it will often appear as a "link preview card" based on its title, description, favicon, and thumbnail. After you publish your page, you can double check that these previews look right using [this tool](https://linkpreview.xyz/)
+description: Simple project page template for your research paper, built with Astro and Tailwind CSS
+thumbnail: screenshot-light.png
 ---
+
 
 import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
 import Picture from "../components/Picture.astro";
-import ModelViewer from "../components/ModelViewer.astro";
+import ModelViewer from "../components/ModelViewer.astro"
 import TwoColumns from "../components/TwoColumns.astro";
 import YouTubeVideo from "../components/YouTubeVideo.astro";
 import LaTeX from "../components/LaTeX.astro";
 import { Comparison } from "../components/Comparison.tsx";
+
+import outside from "../assets/outside.mp4";
+import transformer from "../assets/transformer.webp";
+import dogsDiffc from "../assets/dogs-diffc.png"
+import dogsTrue from "../assets/dogs-true.png"
+
 import Table from "../components/Table.astro";
-export const components = { table: Table };
+export const components = { table: Table }
 
 <HighlightedSection>
 
 ## Abstract
 
-We study **personalized decision modeling** in settings where individual choices deviate from population-optimal predictions. We introduce **ATHENA**—an *Adaptive Textual‑symbolic Human‑centric Reaso*ning framework—built in two stages: (1) a **group‑level symbolic utility discovery** procedure (LLM‑augmented symbolic search) learns compact, interpretable utility forms; and (2) an **individual‑level semantic adaptation** step refines a **personal template** with TextGrad to capture each person’s preferences and constraints. On **Swissmetro** (travel mode choice) and **COVID‑19 vaccine uptake** tasks, ATHENA consistently outperforms utility‑based, ML, and LLM baselines, improving F1 by ≥ 6.5% over the strongest alternatives while maintaining calibrated probabilistic predictions. Together, these stages bridge classic **Random Utility Maximization** with **textual semantic context**, yielding interpretable structure and personalized reasoning.
+Designing optimal prompts and reasoning processes for large language models (LLMs) on domain-specific tasks is both necessary and challenging in real-world applications. Determining how to integrate domain knowledge, enhance reasoning efficiency, and even provide domain experts with refined knowledge integration hints are particularly crucial yet unresolved tasks. In this research, we propose Evolutionary Graph Optimization for Prompting (EGO-Prompt), an automated framework to designing optimal prompts, efficient reasoning processes and providing enhanced causal-informed process. EGO-Prompt begins with an general prompt and fault-tolerant initial Semantic Causal Graph (SCG) descriptions, constructed by human experts, which is then automatically refined and optimized to guide LLM reasoning. Recognizing that expert-defined SCGs may be partial or imperfect and that their optimal integration varies across LLMs, EGO-Prompt integrates a novel causal-guided textual gradient process in two steps: first, generating nearly deterministic reasoning guidance from the SCG for each instance, and second, adapting the LLM to effectively utilize the guidance alongside the original input. The iterative optimization algorithm further refines both the SCG and the reasoning mechanism using textual gradients with ground-truth. We tested the framework on real-world public health, transportation and human behavior tasks and EGO-Prompt demonstrates clear improvements, achieving increases of 7.32%–12.61% in F1 score compared to state-of-the-art methods. Furthermore, EGO-Prompt allows small models to reach reasoning-level performance at over 7× lower cost, together with an interpretable refined domain SCG for enhanced interpretability.
 
 </HighlightedSection>
 
-## Method at a Glance
+## Figures
 
-<TwoColumns>
-  <Figure slot="left">
-    <LaTeX slot="figure" formula="P(\,y_i=j\mid X_i\,) = \frac{e^{f(X_i,j;\,\theta)}}{\sum_k e^{f(X_i,k;\,\theta)}}" />
-    <Fragment slot="caption">Choice probability under Random Utility Maximization, where <LaTeX inline formula="f" /> is the systematic utility we learn symbolically. </Fragment>
-  </Figure>
-  <Figure slot="right">
-    <LaTeX slot="figure" formula="P^{t+1}_i \leftarrow P^t_i - \eta\,\nabla_{P_i} \, \mathcal{L}(P^t_i, D_i)" />
-    <Fragment slot="caption">Individual‑level **TextGrad** updates a textual **personal template** to reflect heterogeneous preferences and constraints. </Fragment>
-  </Figure>
-</TwoColumns>
 
-### Two‑Stage Pipeline
+<Figure>
+  <Picture slot="figure" src="../assets/fig1.pdf" alt="" invertInDarkMode />
+  <Fragment slot="caption">Overview of the proposed EGO-Prompt framework. (a) LLMs often struggle with domain-specific tasks due to the optimal prompt design and domain knowledge gap. Existing methods rely on the external database or established graph. In comparison, EGO-Prompt evolutionarily incorporates expert knowledge with minimal cost. (b) We represent external knowledge as a graph-based structure. A graph-enhanced prompt is then generated to guide the LLM’s reasoning. Both the graph and the prompt are iteratively optimized using textual gradients from ground-truth data.</Fragment>
+</Figure>
 
-1. **Group‑level symbolic utility discovery.** LLM‑guided sampling + feedback (mutation/crossover) proposes candidate utility formulas; we select <LaTeX inline formula="f^*_g" /> by cross‑entropy over held‑out data.
-2. **Individual‑level semantic adaptation.** Seeded by <LaTeX inline formula="f^*_g" />, a **personalized semantic template** <LaTeX inline formula="P_i" /> is iteratively improved using **textual gradients** to minimize the individual loss.
 
-## Results
+## BibTeX citation
 
-### Overall performance on Swissmetro & Vaccine
-
-| Task | Best Baseline (Acc/F1) | **ATHENA** (Acc/F1) | AUC | Note |
-| :-- | :-- | :-- | :-- | :-- |
-| Swissmetro | ≈ 0.75 / 0.71 (few‑shot LLM / ML) | **0.81 / 0.77** | **0.88** | +≥6% Acc, +≥6.5% F1 over strongest baseline |
-| Vaccine | ≈ 0.67 / 0.67 (ML) | **0.73 / 0.72** | **0.87** | Best F1 and AUC among all methods |
-
-Values summarized from the main table; see paper for exact numbers and settings.
-
-### Why it works
-
-- **Interpretable structure.** Symbolic utilities converge to compact, reusable fragments (e.g., age–trust interactions), improving generalization and insight.
-- **Personalization.** TextGrad adapts from a strong symbolic prior, avoiding local minima of unguided prompting. Ablations show either stage alone underperforms the full pipeline.
-
-## Demo & Artifacts
-
-- 🧪 **Datasets:** Swissmetro (mode choice), COVID‑19 Vaccine choice (international survey subset).
-- 🧩 **Backbones:** gpt‑4o‑mini, gemini‑2.0‑flash (others in appendix).
-- 🛠️ **Code:** to be released.
-
-## BibTeX
+Displaying your BibTeX citation in a code block makes it easy to copy and paste.
 
 ```bibtex
-@inproceedings{zhao2025athena,
-  title        = {Personalized Decision Modeling: Utility Optimization or Textualized-Symbolic Reasoning},
-  author       = {Yibo Zhao and Yang Zhao and Hongru Du and Hao Frank Yang},
-  booktitle    = {NeurIPS},
-  year         = {2025}
+@inproceedings{zhao2025how,
+  author = "{Yang Zhao, Pu Wang, Hao Frank Yang}",
+  title = "How to Auto-optimize Prompts for Domain Tasks? Adaptive Prompting and Reasoning through Evolutionary Structured Knowledge Adaptation",
+  booktitle={The Thirty-Ninth Annual Conference on Neural Information Processing Systems (NeurIPS)},
+  year = "2025",
 }
 ```
 
-## Acknowledgments
-
-We thank collaborators and domain experts whose feedback informed the **Concept Library** used during symbolic discovery.
