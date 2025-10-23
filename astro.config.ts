@@ -40,4 +40,7 @@ export default defineConfig({
       },
     ],
   },
+  site: 'https://yibozh.github.io/Athena',
+  base: '/Athena/',
+  build: { outDir: 'dist' },
 });
