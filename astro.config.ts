@@ -41,6 +41,6 @@ export default defineConfig({
     ],
   },
   site: 'https://miemieyanga.github.io/EGOPrompt',
-  base: '/EGOPrompt/',
+  base: '/EGOPrompt',
   build: { outDir: 'dist' },
 });
