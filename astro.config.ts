@@ -40,7 +40,7 @@ export default defineConfig({
       },
     ],
   },
-  site: 'https://yibozh.github.io/Athena',
-  base: '/Athena/',
+  site: 'https://miemieyanga.github.io/EGOPrompt',
+  base: '/EGOPrompt/',
   build: { outDir: 'dist' },
 });
