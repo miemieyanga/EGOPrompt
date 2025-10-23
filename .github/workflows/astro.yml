@@ -69,8 +69,8 @@ jobs:
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
-            --site "https://yibozh.github.io/Athena" \
-            --base "/Athena/"
+            --site "https://miemieyanga.github.io/EGOPrompt" \
+            --base "/EGOPrompt/"
         working-directory: ${{ env.BUILD_PATH }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
